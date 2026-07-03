@@ -29,5 +29,5 @@ karena tujuan utama tugas ini adalah membuktikan pemahaman 100% terhadap kode ya
 ## Timeline
 - [x] Hari 1: Planning & setup
 - [x] Hari 2: Slicing UI (Hero, About, Skills)
-- [ ] Hari 3: Portfolio, Contact, responsivitas
+- [x] Hari 3: Portfolio, Contact, responsivitas
 - [ ] Hari 4: Deployment
