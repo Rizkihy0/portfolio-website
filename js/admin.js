@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://portfolio-website-production-b6ab.up.railway.app/api';
 let adminKey = '';
 
 // ===== LOGIN =====

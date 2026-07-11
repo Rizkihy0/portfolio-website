@@ -1,5 +1,5 @@
 // ===== AMBIL DATA DARI API =====
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://portfolio-website-production-b6ab.up.railway.app/api';
 
 async function loadSkills() {
   try {
