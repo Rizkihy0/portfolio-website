@@ -1,6 +1,32 @@
 // ===== AMBIL DATA DARI API =====
 const API_URL = 'https://portfolio-website-production-b6ab.up.railway.app/api';
 
+async function loadSiteContent() {
+  try {
+    const response = await fetch(`${API_URL}/content`);
+    const content = await response.json();
+
+    document.getElementById('heroGreeting').textContent = content.hero_greeting;
+    document.getElementById('heroName').textContent = content.hero_name;
+    document.getElementById('heroHeadline').textContent = content.hero_headline;
+    document.getElementById('heroTagline').textContent = content.hero_tagline;
+
+    document.getElementById('aboutTitle').textContent = content.about_title;
+    document.getElementById('aboutText1').textContent = content.about_text_1;
+    document.getElementById('aboutText2').textContent = content.about_text_2;
+
+    document.getElementById('contactIntro').textContent = content.contact_intro;
+    document.getElementById('contactGithub').href = content.contact_github;
+    document.getElementById('contactLinkedin').href = content.contact_linkedin;
+    document.getElementById('contactEmail').href = `mailto:${content.contact_email}`;
+
+    document.title = `${content.hero_name} | Portfolio`;
+
+  } catch (error) {
+    console.error('Gagal memuat konten situs:', error);
+  }
+}
+
 async function loadSkills() {
   try {
     const response = await fetch(`${API_URL}/skills`);
@@ -48,6 +74,7 @@ async function loadPortfolio() {
   }
 }
 
+loadSiteContent();
 loadSkills();
 loadPortfolio();
 

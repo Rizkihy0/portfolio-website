@@ -79,6 +79,34 @@ app.delete('/api/portfolio/:id', checkAdminKey, (req, res) => {
   });
 });
 
+// ===== GET semua site content =====
+app.get('/api/content', (req, res) => {
+  db.query('SELECT * FROM site_content', (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    const content = {};
+    results.forEach(row => {
+      content[row.content_key] = row.content_value;
+    });
+    res.json(content);
+  });
+});
+
+// ===== UPDATE satu site content =====
+app.put('/api/content/:key', checkAdminKey, (req, res) => {
+  const { key } = req.params;
+  const { value } = req.body;
+
+  db.query(
+    'UPDATE site_content SET content_value = ? WHERE content_key = ?',
+    [value, key],
+    (err) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ key, value });
+    }
+  );
+});
+
 // ===== Route dasar (cek server hidup) =====
 app.get('/', (req, res) => {
   res.send('Portfolio Backend API is running');
