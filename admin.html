@@ -30,7 +30,10 @@
     <aside class="sidebar">
       <div class="sidebar-brand">Portfolio<span>.</span></div>
       <nav class="sidebar-nav">
-        <a href="#skills-section" class="sidebar-link active">
+        <a href="#content-section" class="sidebar-link active">
+          <span class="dot"></span> Konten
+        </a>
+        <a href="#skills-section" class="sidebar-link">
           <span class="dot"></span> Skills
         </a>
         <a href="#portfolio-section" class="sidebar-link">
@@ -58,6 +61,62 @@
           </div>
         </div>
       </header>
+
+      <section id="content-section" class="panel">
+        <div class="panel-head">
+          <h2>Konten Halaman</h2>
+          <p>Edit teks yang tampil di Hero, About, dan Contact.</p>
+        </div>
+
+        <div class="panel-body">
+          <div class="content-group">
+            <h3>Hero</h3>
+            <label>Sapaan</label>
+            <input type="text" id="edit_hero_greeting">
+            <label>Nama</label>
+            <input type="text" id="edit_hero_name">
+            <label>Headline</label>
+            <input type="text" id="edit_hero_headline">
+            <label>Tagline</label>
+            <textarea id="edit_hero_tagline" rows="2"></textarea>
+            <button class="btn-primary" onclick="saveContent('hero_greeting', 'edit_hero_greeting')">Simpan Sapaan</button>
+            <button class="btn-primary" onclick="saveContent('hero_name', 'edit_hero_name')">Simpan Nama</button>
+            <button class="btn-primary" onclick="saveContent('hero_headline', 'edit_hero_headline')">Simpan Headline</button>
+            <button class="btn-primary" onclick="saveContent('hero_tagline', 'edit_hero_tagline')">Simpan Tagline</button>
+          </div>
+
+          <div class="content-group">
+            <h3>About</h3>
+            <label>Judul</label>
+            <input type="text" id="edit_about_title">
+            <label>Paragraf 1</label>
+            <textarea id="edit_about_text_1" rows="3"></textarea>
+            <label>Paragraf 2</label>
+            <textarea id="edit_about_text_2" rows="3"></textarea>
+            <button class="btn-primary" onclick="saveContent('about_title', 'edit_about_title')">Simpan Judul</button>
+            <button class="btn-primary" onclick="saveContent('about_text_1', 'edit_about_text_1')">Simpan Paragraf 1</button>
+            <button class="btn-primary" onclick="saveContent('about_text_2', 'edit_about_text_2')">Simpan Paragraf 2</button>
+          </div>
+
+          <div class="content-group">
+            <h3>Contact</h3>
+            <label>Kalimat Pengantar</label>
+            <textarea id="edit_contact_intro" rows="2"></textarea>
+            <label>Link GitHub</label>
+            <input type="text" id="edit_contact_github">
+            <label>Link LinkedIn</label>
+            <input type="text" id="edit_contact_linkedin">
+            <label>Email</label>
+            <input type="text" id="edit_contact_email">
+            <button class="btn-primary" onclick="saveContent('contact_intro', 'edit_contact_intro')">Simpan Pengantar</button>
+            <button class="btn-primary" onclick="saveContent('contact_github', 'edit_contact_github')">Simpan GitHub</button>
+            <button class="btn-primary" onclick="saveContent('contact_linkedin', 'edit_contact_linkedin')">Simpan LinkedIn</button>
+            <button class="btn-primary" onclick="saveContent('contact_email', 'edit_contact_email')">Simpan Email</button>
+          </div>
+
+          <p id="contentSaveMsg" class="save-msg"></p>
+        </div>
+      </section>
 
       <section id="skills-section" class="panel">
         <div class="panel-head">

@@ -38,11 +38,53 @@ async function testAdminKey() {
 
     document.getElementById('loginBox').classList.add('hidden');
     document.getElementById('adminPanel').classList.remove('hidden');
+    loadContentForm();
     loadSkillsList();
     loadPortfolioList();
 
   } catch (error) {
     document.getElementById('loginError').textContent = 'Gagal terhubung ke server';
+  }
+}
+
+// ===== SITE CONTENT =====
+async function loadContentForm() {
+  const response = await fetch(`${API_URL}/content`);
+  const content = await response.json();
+
+  Object.keys(content).forEach(key => {
+    const el = document.getElementById(`edit_${key}`);
+    if (el) el.value = content[key];
+  });
+}
+
+async function saveContent(key, inputId) {
+  const value = document.getElementById(inputId).value.trim();
+  const msg = document.getElementById('contentSaveMsg');
+
+  try {
+    const response = await fetch(`${API_URL}/content/${key}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-key': adminKey
+      },
+      body: JSON.stringify({ value })
+    });
+
+    if (!response.ok) {
+      msg.textContent = 'Gagal menyimpan. Coba lagi.';
+      msg.style.color = 'var(--danger)';
+      return;
+    }
+
+    msg.textContent = 'Tersimpan.';
+    msg.style.color = 'var(--blue-dark)';
+    setTimeout(() => { msg.textContent = ''; }, 2000);
+
+  } catch (error) {
+    msg.textContent = 'Gagal terhubung ke server.';
+    msg.style.color = 'var(--danger)';
   }
 }
 
