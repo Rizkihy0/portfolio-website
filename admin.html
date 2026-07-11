@@ -3,44 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Portfolio</title>
+  <title>Admin — Portfolio CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 
-  <div class="admin-container">
-    <h1>Admin Panel</h1>
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="loginBox" class="login-screen">
+    <div class="login-card">
+      <div class="login-mark">P<span>.</span></div>
+      <h1>Admin Panel</h1>
+      <p class="login-sub">Masuk untuk mengelola konten portfolio</p>
 
-    <!-- Login sederhana -->
-    <div id="loginBox" class="card">
-      <h2>Masuk</h2>
-      <input type="password" id="adminKeyInput" placeholder="Masukkan password admin">
-      <button onclick="login()">Masuk</button>
+      <label for="adminKeyInput">Password</label>
+      <input type="password" id="adminKeyInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+      <button class="btn-primary btn-block" onclick="login()">Masuk</button>
       <p id="loginError" class="error-text"></p>
     </div>
+  </div>
 
-    <!-- Panel utama, disembunyikan sampai berhasil login -->
-    <div id="adminPanel" class="hidden">
+  <!-- ===== DASHBOARD ===== -->
+  <div id="adminPanel" class="dashboard hidden">
 
-      <section class="card">
-        <h2>Tambah Skill</h2>
-        <input type="text" id="skillName" placeholder="Nama skill, misal: Figma">
-        <button onclick="addSkill()">Tambah Skill</button>
-        <div id="skillsList"></div>
+    <aside class="sidebar">
+      <div class="sidebar-brand">Portfolio<span>.</span></div>
+      <nav class="sidebar-nav">
+        <a href="#skills-section" class="sidebar-link active">
+          <span class="dot"></span> Skills
+        </a>
+        <a href="#portfolio-section" class="sidebar-link">
+          <span class="dot"></span> Proyek
+        </a>
+      </nav>
+      <a href="index.html" class="sidebar-view-site" target="_blank">Lihat Situs ↗</a>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="topbar-sub">Kelola konten yang tampil di halaman utama</p>
+        </div>
+        <div class="stat-strip">
+          <div class="stat">
+            <span class="stat-num" id="statSkills">0</span>
+            <span class="stat-label">Skills</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num" id="statProjects">0</span>
+            <span class="stat-label">Proyek</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="skills-section" class="panel">
+        <div class="panel-head">
+          <h2>Skills</h2>
+          <p>Daftar bahasa dan tools yang ditampilkan di halaman utama.</p>
+        </div>
+
+        <div class="panel-body">
+          <div class="add-row">
+            <input type="text" id="skillName" placeholder="Nama skill, misal: Figma" onkeydown="if(event.key==='Enter')addSkill()">
+            <button class="btn-primary" onclick="addSkill()">+ Tambah</button>
+          </div>
+          <div id="skillsList" class="list"></div>
+        </div>
       </section>
 
-      <section class="card">
-        <h2>Tambah Proyek</h2>
-        <input type="text" id="projTitle" placeholder="Judul proyek">
-        <textarea id="projDesc" placeholder="Deskripsi proyek" rows="3"></textarea>
-        <input type="text" id="projTags" placeholder="Tags, pisahkan dengan koma (misal: HTML, CSS, JS)">
-        <input type="text" id="projLink" placeholder="Link (URL)">
-        <input type="text" id="projLinkText" placeholder="Teks tombol, misal: Lihat di GitHub →">
-        <button onclick="addProject()">Tambah Proyek</button>
-        <div id="portfolioList"></div>
-      </section>
+      <section id="portfolio-section" class="panel">
+        <div class="panel-head">
+          <h2>Proyek</h2>
+          <p>Proyek yang ditampilkan di section Portfolio.</p>
+        </div>
 
-    </div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <input type="text" id="projTitle" placeholder="Judul proyek">
+            <input type="text" id="projTags" placeholder="Tags, pisahkan koma (HTML, CSS, JS)">
+            <textarea id="projDesc" placeholder="Deskripsi proyek" rows="2"></textarea>
+            <input type="text" id="projLink" placeholder="Link (URL)">
+            <input type="text" id="projLinkText" placeholder="Teks tombol, misal: Lihat di GitHub →">
+            <button class="btn-primary btn-block" onclick="addProject()">+ Tambah Proyek</button>
+          </div>
+          <div id="portfolioList" class="list"></div>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="js/admin.js"></script>

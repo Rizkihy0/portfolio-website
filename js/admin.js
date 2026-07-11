@@ -51,15 +51,22 @@ async function loadSkillsList() {
   const response = await fetch(`${API_URL}/skills`);
   const skills = await response.json();
 
+  document.getElementById('statSkills').textContent = skills.length;
+
   const container = document.getElementById('skillsList');
   container.innerHTML = '';
+
+  if (skills.length === 0) {
+    container.innerHTML = '<p class="item-empty">Belum ada skill. Tambahkan lewat form di atas.</p>';
+    return;
+  }
 
   skills.forEach(skill => {
     const row = document.createElement('div');
     row.className = 'item-row';
     row.innerHTML = `
       <span>${skill.name}</span>
-      <button onclick="deleteSkill(${skill.id})">Hapus</button>
+      <button class="btn-delete" onclick="deleteSkill(${skill.id})">Hapus</button>
     `;
     container.appendChild(row);
   });
@@ -95,15 +102,22 @@ async function loadPortfolioList() {
   const response = await fetch(`${API_URL}/portfolio`);
   const projects = await response.json();
 
+  document.getElementById('statProjects').textContent = projects.length;
+
   const container = document.getElementById('portfolioList');
   container.innerHTML = '';
+
+  if (projects.length === 0) {
+    container.innerHTML = '<p class="item-empty">Belum ada proyek. Tambahkan lewat form di atas.</p>';
+    return;
+  }
 
   projects.forEach(project => {
     const row = document.createElement('div');
     row.className = 'item-row';
     row.innerHTML = `
       <span>${project.title}</span>
-      <button onclick="deleteProject(${project.id})">Hapus</button>
+      <button class="btn-delete" onclick="deleteProject(${project.id})">Hapus</button>
     `;
     container.appendChild(row);
   });
