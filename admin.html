@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Portfolio</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-container">
+    <h1>Admin Panel</h1>
+
+    <!-- Login sederhana -->
+    <div id="loginBox" class="card">
+      <h2>Masuk</h2>
+      <input type="password" id="adminKeyInput" placeholder="Masukkan password admin">
+      <button onclick="login()">Masuk</button>
+      <p id="loginError" class="error-text"></p>
+    </div>
+
+    <!-- Panel utama, disembunyikan sampai berhasil login -->
+    <div id="adminPanel" class="hidden">
+
+      <section class="card">
+        <h2>Tambah Skill</h2>
+        <input type="text" id="skillName" placeholder="Nama skill, misal: Figma">
+        <button onclick="addSkill()">Tambah Skill</button>
+        <div id="skillsList"></div>
+      </section>
+
+      <section class="card">
+        <h2>Tambah Proyek</h2>
+        <input type="text" id="projTitle" placeholder="Judul proyek">
+        <textarea id="projDesc" placeholder="Deskripsi proyek" rows="3"></textarea>
+        <input type="text" id="projTags" placeholder="Tags, pisahkan dengan koma (misal: HTML, CSS, JS)">
+        <input type="text" id="projLink" placeholder="Link (URL)">
+        <input type="text" id="projLinkText" placeholder="Teks tombol, misal: Lihat di GitHub →">
+        <button onclick="addProject()">Tambah Proyek</button>
+        <div id="portfolioList"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
