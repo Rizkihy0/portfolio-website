@@ -27,6 +27,35 @@ async function loadSiteContent() {
   }
 }
 
+async function loadEducation() {
+  try {
+    const response = await fetch(`${API_URL}/education`);
+    const educationList = await response.json();
+
+    const timeline = document.getElementById('educationTimeline');
+    timeline.innerHTML = '';
+
+    educationList.forEach(edu => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+
+      const majorHTML = edu.major ? `<p class="timeline-major">${edu.major}</p>` : '';
+      const descHTML = edu.description ? `<p class="timeline-desc">${edu.description}</p>` : '';
+
+      item.innerHTML = `
+        <p class="timeline-year">${edu.year_start} — ${edu.year_end}</p>
+        <h3>${edu.institution}</h3>
+        ${majorHTML}
+        ${descHTML}
+      `;
+
+      timeline.appendChild(item);
+    });
+  } catch (error) {
+    console.error('Gagal memuat riwayat pendidikan:', error);
+  }
+}
+
 async function loadSkills() {
   try {
     const response = await fetch(`${API_URL}/skills`);
@@ -75,6 +104,7 @@ async function loadPortfolio() {
 }
 
 loadSiteContent();
+loadEducation();
 loadSkills();
 loadPortfolio();
 

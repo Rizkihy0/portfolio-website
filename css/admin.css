@@ -440,6 +440,28 @@ input:focus, textarea:focus {
   min-height: 16px;
 }
 
+.item-row-multiline {
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.item-row-multiline:last-child {
+  border-bottom: none;
+}
+
+.item-row-multiline .item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.item-row-multiline .item-year {
+  color: var(--blue-dark);
+  font-size: 12px;
+  font-weight: 600;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 720px) {
   .sidebar {

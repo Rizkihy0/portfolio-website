@@ -39,6 +39,7 @@ async function testAdminKey() {
     document.getElementById('loginBox').classList.add('hidden');
     document.getElementById('adminPanel').classList.remove('hidden');
     loadContentForm();
+    loadEducationList();
     loadSkillsList();
     loadPortfolioList();
 
@@ -86,6 +87,74 @@ async function saveContent(key, inputId) {
     msg.textContent = 'Gagal terhubung ke server.';
     msg.style.color = 'var(--danger)';
   }
+}
+
+// ===== EDUCATION =====
+async function loadEducationList() {
+  const response = await fetch(`${API_URL}/education`);
+  const educationList = await response.json();
+
+  document.getElementById('statEducation').textContent = educationList.length;
+
+  const container = document.getElementById('educationList');
+  container.innerHTML = '';
+
+  if (educationList.length === 0) {
+    container.innerHTML = '<p class="item-empty">Belum ada riwayat pendidikan. Tambahkan lewat form di atas.</p>';
+    return;
+  }
+
+  educationList.forEach(edu => {
+    const row = document.createElement('div');
+    row.className = 'item-row-multiline';
+    const majorText = edu.major ? ` — ${edu.major}` : '';
+    row.innerHTML = `
+      <div class="item-top">
+        <div>
+          <p class="item-year">${edu.level} · ${edu.year_start} — ${edu.year_end}</p>
+          <span>${edu.institution}${majorText}</span>
+        </div>
+        <button class="btn-delete" onclick="deleteEducation(${edu.id})">Hapus</button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+async function addEducation() {
+  const level = document.getElementById('eduLevel').value.trim();
+  const institution = document.getElementById('eduInstitution').value.trim();
+  const major = document.getElementById('eduMajor').value.trim();
+  const year_start = document.getElementById('eduYearStart').value.trim();
+  const year_end = document.getElementById('eduYearEnd').value.trim();
+  const description = document.getElementById('eduDescription').value.trim();
+
+  if (!level || !institution || !year_start || !year_end) return;
+
+  await fetch(`${API_URL}/education`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-admin-key': adminKey
+    },
+    body: JSON.stringify({ level, institution, major, year_start, year_end, description })
+  });
+
+  document.getElementById('eduLevel').value = '';
+  document.getElementById('eduInstitution').value = '';
+  document.getElementById('eduMajor').value = '';
+  document.getElementById('eduYearStart').value = '';
+  document.getElementById('eduYearEnd').value = '';
+  document.getElementById('eduDescription').value = '';
+  loadEducationList();
+}
+
+async function deleteEducation(id) {
+  await fetch(`${API_URL}/education/${id}`, {
+    method: 'DELETE',
+    headers: { 'x-admin-key': adminKey }
+  });
+  loadEducationList();
 }
 
 // ===== SKILLS =====

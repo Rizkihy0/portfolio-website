@@ -33,6 +33,9 @@
         <a href="#content-section" class="sidebar-link active">
           <span class="dot"></span> Konten
         </a>
+        <a href="#education-section" class="sidebar-link">
+          <span class="dot"></span> Pendidikan
+        </a>
         <a href="#skills-section" class="sidebar-link">
           <span class="dot"></span> Skills
         </a>
@@ -50,6 +53,11 @@
           <p class="topbar-sub">Kelola konten yang tampil di halaman utama</p>
         </div>
         <div class="stat-strip">
+          <div class="stat">
+            <span class="stat-num" id="statEducation">0</span>
+            <span class="stat-label">Pendidikan</span>
+          </div>
+          <div class="stat-divider"></div>
           <div class="stat">
             <span class="stat-num" id="statSkills">0</span>
             <span class="stat-label">Skills</span>
@@ -115,6 +123,32 @@
           </div>
 
           <p id="contentSaveMsg" class="save-msg"></p>
+        </div>
+      </section>
+
+      <section id="education-section" class="panel">
+        <div class="panel-head">
+          <h2>Riwayat Pendidikan</h2>
+          <p>Jenjang pendidikan yang ditampilkan di timeline halaman utama.</p>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-grid">
+            <label>Jenjang (SMP / SMA / S1, dst)</label>
+            <input type="text" id="eduLevel" placeholder="Contoh: SMA">
+            <label>Nama Institusi</label>
+            <input type="text" id="eduInstitution" placeholder="Nama sekolah/kampus">
+            <label>Jurusan (opsional)</label>
+            <input type="text" id="eduMajor" placeholder="Contoh: Informatika">
+            <label>Tahun Mulai</label>
+            <input type="text" id="eduYearStart" placeholder="Contoh: 2021">
+            <label>Tahun Selesai</label>
+            <input type="text" id="eduYearEnd" placeholder="Contoh: 2024 atau Sekarang">
+            <label>Deskripsi (opsional)</label>
+            <textarea id="eduDescription" placeholder="Deskripsi singkat" rows="2"></textarea>
+            <button class="btn-primary btn-block" onclick="addEducation()">+ Tambah Riwayat</button>
+          </div>
+          <div id="educationList" class="list"></div>
         </div>
       </section>
 

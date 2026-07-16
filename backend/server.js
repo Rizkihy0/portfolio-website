@@ -79,6 +79,50 @@ app.delete('/api/portfolio/:id', checkAdminKey, (req, res) => {
   });
 });
 
+// ===== GET semua education =====
+app.get('/api/education', (req, res) => {
+  db.query('SELECT * FROM education ORDER BY id ASC', (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+
+// ===== TAMBAH education baru =====
+app.post('/api/education', checkAdminKey, (req, res) => {
+  const { level, institution, major, year_start, year_end, description } = req.body;
+  db.query(
+    'INSERT INTO education (level, institution, major, year_start, year_end, description) VALUES (?, ?, ?, ?, ?, ?)',
+    [level, institution, major, year_start, year_end, description],
+    (err, result) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ id: result.insertId, level, institution, major, year_start, year_end, description });
+    }
+  );
+});
+
+// ===== EDIT education =====
+app.put('/api/education/:id', checkAdminKey, (req, res) => {
+  const { id } = req.params;
+  const { level, institution, major, year_start, year_end, description } = req.body;
+  db.query(
+    'UPDATE education SET level = ?, institution = ?, major = ?, year_start = ?, year_end = ?, description = ? WHERE id = ?',
+    [level, institution, major, year_start, year_end, description, id],
+    (err) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ message: 'Riwayat pendidikan berhasil diperbarui' });
+    }
+  );
+});
+
+// ===== HAPUS education =====
+app.delete('/api/education/:id', checkAdminKey, (req, res) => {
+  const { id } = req.params;
+  db.query('DELETE FROM education WHERE id = ?', [id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Riwayat pendidikan berhasil dihapus' });
+  });
+});
+
 // ===== GET semua site content =====
 app.get('/api/content', (req, res) => {
   db.query('SELECT * FROM site_content', (err, results) => {
